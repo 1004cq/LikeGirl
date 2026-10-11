@@ -1,0 +1,37 @@
+---
+import { ARCHIVE } from '../data/voices';
+---
+
+<section class="hero" aria-label="Archive entrance" id="top">
+  <canvas id="orbit-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-veil" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <p class="micro-label" id="archive-index">
+      Archive No. {ARCHIVE.number} · Day — · {ARCHIVE.establishedLabel}
+    </p>
+    <h1 class="hero-title">
+      <span class="hero-title-line">Silent Tides,</span>
+      <span class="hero-title-line italic">Constant Light</span>
+    </h1>
+    <p class="hero-lede">{ARCHIVE.lede}</p>
+    <div class="hero-cta">
+      <a href="#chapters" class="cta-primary">Enter the chapters</a>
+      <a href="#voices" class="cta-ghost">Read both voices</a>
+    </div>
+  </div>
+
+  <a href="#chapters" class="hero-scroll" aria-label="Scroll to chapters">
+    <span class="micro-label">Scroll</span>
+    <span class="scroll-line" aria-hidden="true"></span>
+  </a>
+</section>
+
+<script>
+  import { initOrbit } from '../lib/orbit';
+
+  const canvas = document.getElementById('orbit-canvas');
+  if (canvas instanceof HTMLCanvasElement) {
+    initOrbit(canvas);
+  }
+</script>

@@ -1,0 +1,25 @@
+---
+---
+
+<div class="soundscape" id="soundscape" data-state="idle">
+  <button
+    type="button"
+    class="soundscape-toggle"
+    id="soundscape-toggle"
+    aria-pressed="false"
+    aria-label="Play ambient soundscape"
+  >
+    <canvas id="wave-canvas" class="soundscape-wave" width="72" height="28" aria-hidden="true"
+    ></canvas>
+    <span class="soundscape-label micro-label" id="soundscape-label">Soundscape</span>
+    <span class="soundscape-state" id="soundscape-state">Off</span>
+  </button>
+  <p class="soundscape-hint micro-label">Tap to begin — never autoplays</p>
+</div>
+
+<script>
+  import { initSoundscape } from '../lib/soundscape';
+
+  const root = document.getElementById('soundscape');
+  if (root) initSoundscape(root);
+</script>

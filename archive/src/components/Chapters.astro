@@ -1,0 +1,18 @@
+---
+import { chapters } from '../data/chapters';
+import ChapterCard from './ChapterCard.astro';
+---
+
+<section id="chapters" class="section chapters" aria-labelledby="chapters-heading">
+  <div class="section-head">
+    <p class="micro-label">Vol. I — Chronology</p>
+    <h2 id="chapters-heading" class="section-title">Curated Chapters</h2>
+    <p class="section-lede">
+      Milestones held as magazine spreads — image against fragment, light against time.
+    </p>
+  </div>
+
+  {chapters.map((chapter, i) => (
+    <ChapterCard chapter={chapter} eager={i === 0} />
+  ))}
+</section>

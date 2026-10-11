@@ -1,26 +1,53 @@
 # Constant Archive
 
-A museum-grade private couple archive — warm editorial minimalism (Kinfolk / Cereal / Aperture).
+Museum-grade private couple archive — **Astro + TypeScript + Tailwind CSS v4**.
+
+Warm editorial minimalism (Kinfolk / Cereal / Aperture). Islands Architecture keeps the page static by default; Canvas orbit and soundscape hydrate as lightweight client scripts.
 
 ## Stack
 
-- Semantic HTML5
-- Tailwind CSS (CDN) + custom editorial CSS
-- Vanilla JS (Canvas physics hero, Web Audio soundscape)
-- Zero heavy frameworks
+| Layer | Choice |
+| --- | --- |
+| Framework | Astro 5 (static SSG, Islands) |
+| Language | TypeScript (strict) |
+| Styles | Tailwind CSS v4 + editorial CSS |
+| Motion | Lenis smooth scroll |
+| Visual | HTML5 Canvas 2D gravitational orbit |
+| Audio | Web Audio API (consent-first, no autoplay) |
 
-## Run locally
+## Develop
 
 ```bash
 cd archive
-python3 -m http.server 4173
+npm install
+npm run dev
 ```
 
-Open `http://localhost:4173`.
+## Build / preview
+
+```bash
+npm run build
+npm run preview
+```
+
+Static output lands in `dist/`.
+
+## Architecture
+
+```
+src/
+  components/   Astro islands & sections
+  data/         Typed chapter + voice content
+  lib/          orbit.ts · soundscape.ts · archive.ts
+  layouts/      BaseLayout
+  pages/        index.astro
+  styles/       Tailwind theme + editorial system
+public/images/  Chapter photography
+```
 
 ## Modules
 
-1. **Ambient Physics Hero** — dual celestial particles in soft gravitational orbit
-2. **Curated Chapters** — magazine split layouts with EXIF stamps
-3. **Polyphonic Monologue** — dual-perspective dialogue at one timestamp
-4. **Soundscape Controller** — glassmorphic capsule, consent-first (no autoplay)
+1. **Ambient Physics Hero** — dual celestial particles, archival day index
+2. **Curated Chapters** — magazine splits, EXIF stamps, mono→color hover
+3. **Polyphonic Monologue** — dual perspective at one timestamp
+4. **Soundscape** — glassmorphic capsule, never autoplays
