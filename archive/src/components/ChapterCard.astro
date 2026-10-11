@@ -1,0 +1,41 @@
+---
+import type { Chapter } from '../data/chapters';
+
+interface Props {
+  chapter: Chapter;
+  eager?: boolean;
+}
+
+const { chapter, eager = false } = Astro.props;
+const classes = [
+  'chapter',
+  'chapter--split',
+  chapter.reverse ? 'chapter--reverse' : '',
+]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<article class={classes} data-parallax>
+  <figure class="chapter-media">
+    <img
+      src={chapter.image}
+      alt={chapter.alt}
+      loading={eager ? 'eager' : 'lazy'}
+      width="1400"
+      height="933"
+    />
+    <figcaption class="exif">
+      <span>{chapter.exif.focal}</span>
+      <span>{chapter.exif.aperture}</span>
+      <span>{chapter.exif.timestamp}</span>
+      <span>{chapter.exif.geo}</span>
+    </figcaption>
+  </figure>
+  <div class="chapter-copy">
+    <p class="micro-label">{chapter.label}</p>
+    <h3 class="chapter-title">{chapter.title}</h3>
+    <p class="chapter-body">{chapter.body}</p>
+    <p class="chapter-pull">{chapter.pull}</p>
+  </div>
+</article>

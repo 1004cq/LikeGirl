@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Chapters from '../components/Chapters.astro';
+import Voices from '../components/Voices.astro';
+import Colophon from '../components/Colophon.astro';
+import Soundscape from '../components/Soundscape.astro';
+import ClientRuntime from '../components/ClientRuntime.astro';
+---
+
+<BaseLayout>
+  <Header />
+  <main>
+    <Hero />
+    <Chapters />
+    <Voices />
+    <Colophon />
+  </main>
+  <Soundscape />
+  <ClientRuntime />
+</BaseLayout>

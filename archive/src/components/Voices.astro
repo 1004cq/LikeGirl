@@ -1,0 +1,43 @@
+---
+import { dualPerspective } from '../data/voices';
+
+const [voiceA, voiceB] = dualPerspective.voices;
+---
+
+<section id="voices" class="section voices" aria-labelledby="voices-heading">
+  <div class="section-head section-head--narrow">
+    <p class="micro-label">Vol. II — Simultaneous Record</p>
+    <h2 id="voices-heading" class="section-title">Polyphonic Monologue</h2>
+    <p class="section-lede">
+      Two unedited perspectives of one timestamp — resonance without revision.
+    </p>
+  </div>
+
+  <div class="voices-meta">
+    <p class="micro-label">{dualPerspective.timestamp}</p>
+  </div>
+
+  <div class="voices-grid" role="group" aria-label="Dual perspective dialogue">
+    <article class="voice">
+      <header class="voice-head">
+        <p class="micro-label">{voiceA.label}</p>
+        <h3 class="voice-name">{voiceA.name}</h3>
+      </header>
+      <blockquote class="voice-text">
+        {voiceA.paragraphs.map((p) => <p>{p}</p>)}
+      </blockquote>
+    </article>
+
+    <div class="voices-rule" aria-hidden="true"></div>
+
+    <article class="voice">
+      <header class="voice-head">
+        <p class="micro-label">{voiceB.label}</p>
+        <h3 class="voice-name">{voiceB.name}</h3>
+      </header>
+      <blockquote class="voice-text">
+        {voiceB.paragraphs.map((p) => <p>{p}</p>)}
+      </blockquote>
+    </article>
+  </div>
+</section>

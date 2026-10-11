@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@import "./editorial.css";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --color-parchment: #f9f8f5;
+  --color-ink: #1e1d1b;
+  --color-terracotta: #b65a42;
+  --color-linen: #d9cbbc;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.site-header[data-solid="true"] {
+  background: rgba(249, 248, 245, 0.92);
+}
