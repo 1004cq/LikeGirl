@@ -23,7 +23,11 @@ export function initSoundscape(root: HTMLElement): () => void {
 
   function ensureAudio() {
     if (audioCtx) return;
-    const AC = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const AC =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (!AC) throw new Error('Web Audio unavailable');
+
     audioCtx = new AC();
     master = audioCtx.createGain();
     master.gain.value = 0;
@@ -69,29 +73,37 @@ export function initSoundscape(root: HTMLElement): () => void {
   }
 
   async function play() {
-    ensureAudio();
-    if (!audioCtx || !master) return;
-    if (audioCtx.state === 'suspended') await audioCtx.resume();
-    const now = audioCtx.currentTime;
-    master.gain.cancelScheduledValues(now);
-    master.gain.setValueAtTime(master.gain.value, now);
-    master.gain.linearRampToValueAtTime(0.85, now + 1.4);
+    // Update UI immediately so consent feedback never depends on audio unlock timing.
     setPlaying(true);
+    try {
+      ensureAudio();
+      if (!audioCtx || !master) return;
+      if (audioCtx.state === 'suspended') await audioCtx.resume();
+      const now = audioCtx.currentTime;
+      master.gain.cancelScheduledValues(now);
+      master.gain.setValueAtTime(master.gain.value, now);
+      master.gain.linearRampToValueAtTime(0.85, now + 1.4);
+    } catch {
+      // Audio may be blocked in locked-down browsers; visual state still reflects consent.
+    }
   }
 
   function pause() {
-    if (!audioCtx || !master) {
-      setPlaying(false);
-      return;
-    }
-    const now = audioCtx.currentTime;
-    master.gain.cancelScheduledValues(now);
-    master.gain.setValueAtTime(master.gain.value, now);
-    master.gain.linearRampToValueAtTime(0, now + 0.9);
     setPlaying(false);
+    if (!audioCtx || !master) return;
+    try {
+      const now = audioCtx.currentTime;
+      master.gain.cancelScheduledValues(now);
+      master.gain.setValueAtTime(master.gain.value, now);
+      master.gain.linearRampToValueAtTime(0, now + 0.9);
+    } catch {
+      // ignore
+    }
   }
 
-  function onClick() {
+  function onClick(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     if (playing) pause();
     else void play();
   }
